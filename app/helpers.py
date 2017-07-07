@@ -7,17 +7,18 @@
 
 import os
 import requests
-from app.exceptions import GeolocationError
+from .exceptions import GeolocationError
 
-def is_empty(any_structure):
+
+def empty(any_structure):
     """
-    | Check if a Python structure is empty
-    | in the pythonic way
+    Check if a Python structure is empty
+    in the pythonic way
     |
-    | :param structure: The structure to be checked of emptyness
-    | :type any_structure: any
-    | :return: True if the structure is empty, False otherwise
-    | :rtype: bool
+    :param any_structure: The structure to be checked of emptyness
+    :type any_structure: any
+    :return: True if the structure is empty, False otherwise
+    :rtype: bool
     """
 
     if any_structure:
@@ -25,10 +26,11 @@ def is_empty(any_structure):
     else:
         return True
 
+
 def print_terminal_line_char(char='*'):
     """
-    | Print a character that take all width in the terminal
-    | :return: Nothing
+    Print a character that take all width in the terminal
+    :return: Nothing
     """
 
     terminal = os.get_terminal_size()
@@ -41,20 +43,20 @@ def print_terminal_line_char(char='*'):
 
 def get_postal_code(city):
     """
-    | Retrieve the postal code from a city code with the French
-    | API WORK ONLY FOR FRANCE
+    Retrieve the postal code from a city code with the French
+    API WORK ONLY FOR FRANCE
     |
-    | :param city: The city with unknow postal_code
-    | :type text: string
-    | :return: The postal_code associated to the city
-    | :rtype: string
+    :param city: The city with unknow postal_code
+    :type city: string
+    :return: The postal_code associated to the city
+    :rtype: string
     """
 
     request = requests.get("https://geo.api.gouv.fr/communes?nom=" + city)
     request.raise_for_status()
     data = request.json()
 
-    if is_empty(data):
+    if empty(data):
         raise GeolocationError("The requested city could not be found")
     elif len(data) > 1:
         print("We cannot retrieve the exact postal code please inquire it : ", end='')
@@ -67,20 +69,20 @@ def get_postal_code(city):
 
 def get_city(postal_code):
     """
-    | Retrieve the city from a postal code with the French
-    | API WORK ONLY FOR FRANCE
-    |
-    | :param postal_code: The postal_code of the city
-    | :type text: string
-    | :return: The city associated to the postal_code
-    | :rtype: string
+    Retrieve the city from a postal code with the French
+    API WORK ONLY FOR FRANCE
+
+    :param postal_code: The postal_code of the city
+    :type postal_code: string
+    :return: The city associated to the postal_code
+    :rtype: string
     """
 
     request = requests.get("https://geo.api.gouv.fr/communes?codePostal=" + postal_code)
     request.raise_for_status()
     data = request.json()
 
-    if is_empty(data):
+    if empty(data):
         raise GeolocationError("The requested postal code could not be found")
 
     return data[0]["nom"]
@@ -88,13 +90,13 @@ def get_city(postal_code):
 
 def get_arrow_icon(text):
     """
-    | Return the unicode icon depending on text crawled
-    | on meteofrance.fr about the direction of the wind
-    |
-    | :param text: The text of the unicode associated
-    | :type text: string
-    | :return: The icon unicode of the text
-    | :rtype: string
+    Return the unicode icon depending on text crawled
+    on meteofrance.fr about the direction of the wind
+
+    :param text: The text of the unicode associated
+    :type text: string
+    :return: The icon unicode of the text
+    :rtype: string
     """
     # TODO: Code this function
     pass
@@ -102,13 +104,13 @@ def get_arrow_icon(text):
 
 def get_weather_icon(text):
     """
-    | Return the unicode icon depending on text crawled
-    | on meteofrance.fr about the weather
-    |
-    | :param text: The text of the unicode associated
-    | :type text: string
-    | :return: The icon unicode of the text
-    | :rtype: string
+    Return the unicode icon depending on text crawled
+    on meteofrance.fr about the weather
+
+    :param text: The text of the unicode associated
+    :type text: string
+    :return: The icon unicode of the text
+    :rtype: string
     """
 
     return {
@@ -142,9 +144,9 @@ def get_weather_icon(text):
 
 def print_presenter():
     """
-    | Print a girl presenter in terminal
-    |
-    | :return: Nothing
+    Print a girl presenter in terminal
+
+    :return: Nothing
     """
     print(r"""
         _._
@@ -154,17 +156,17 @@ def print_presenter():
      '-\_=_/-'      //
     .-'\   /'-.    (|/
    /    '-'    \  / /
-   | \__   __/_/\/ /|
-   | |\     / \   /
+   \__   __/_/\/ /|
+   |\     / \   /
    \  \     \  '-'
     `\/\     ;
      |/|\    |
-     |       |
-     |       |
-     |       |
+           |
+           |
+           |
      |_______|
-      |  |  |
-       \ | /
+        |
+       \ /
        /=|=\
       (_/T\_)
       """)

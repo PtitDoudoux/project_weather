@@ -8,16 +8,17 @@
 import sys
 import fire
 from requests.exceptions import RequestException
+from PyQt5.QtWidgets import QApplication
 from app.exceptions import GeolocationError, MeteoFranceError
 from app.webmining import MeteoFrance
+from app.gui import WeatherForm
 from app.helpers import print_presenter, print_terminal_line_char
 
 
-class Weather(object):
+class Weather:
     """ A Weather Fire class for CLI purpose """
 
-
-    def today(self, city=None, postal_code=None): # pylint: disable=R0201
+    def today(self, city=None, postal_code=None):  # pylint: disable=R0201
         """ Retrieve and print in terminal the today weather """
 
         try:
@@ -36,8 +37,7 @@ class Weather(object):
         print("* Et le vent :", weather["wind"])
         print_terminal_line_char('*')
 
-
-    def tommorow(self, city=None, postal_code=None): # pylint: disable=R0201
+    def tommorow(self, city=None, postal_code=None):  # pylint: disable=R0201
         """ Retrieve and print in terminal the tommorow weather """
 
         try:
@@ -56,8 +56,7 @@ class Weather(object):
         print("* Et le vent :", weather["wind"])
         print_terminal_line_char('*')
 
-
-    def after_tommorow(self, city=None, postal_code=None): # pylint: disable=R0201
+    def after_tommorow(self, city=None, postal_code=None):  # pylint: disable=R0201
         """ Retrieve and print in terminal the after tommorow weather """
 
         try:
@@ -76,8 +75,7 @@ class Weather(object):
         print("* Et le vent :", weather["wind"])
         print_terminal_line_char('*')
 
-
-    def week(self, city=None, postal_code=None): # pylint: disable=R0201
+    def week(self, city=None, postal_code=None):  # pylint: disable=R0201
         """ Retrieve and print in terminal the week weather """
 
         try:
@@ -86,7 +84,6 @@ class Weather(object):
         except (GeolocationError, MeteoFranceError, RequestException,
                 ValueError) as error:
             sys.exit(error)
-
 
         print_terminal_line_char('*')
         for wd_el in weather:
@@ -102,8 +99,7 @@ class Weather(object):
                 print("* Indice de confiance :", wd_el["trust"])
             print_terminal_line_char('*')
 
-
-    def next_week(self, city=None, postal_code=None):
+    def next_week(self, city=None, postal_code=None):  # pylint: disable=R0201
         """ Retrieve and print in terminal the next week weather """
 
         try:
@@ -115,7 +111,6 @@ class Weather(object):
 
         print_terminal_line_char('*')
         for wd_el in weather:
-
             print("* A :", wd_el["geo"])
             print("* Au :", wd_el["datetime"])
             print("* La température sera de :", wd_el["temp"])
@@ -124,14 +119,18 @@ class Weather(object):
             print("* Indice de confiance :", wd_el["trust"])
             print_terminal_line_char('*')
 
-
-    def presenter(self): # pylint: disable=R0201
+    def presenter(self):  # pylint: disable=R0201
         """ LOL Func who print a female presenter for the meteo """
 
         print("Say Hi to Évelyne Dhéliat !")
         print_presenter()
 
+    def gui(self):  # pylint: disable=R0201
+        """ Function for launching the Weather GUI """
+        app = QApplication(sys.argv)
+        weather_gui = WeatherForm()
+        weather_gui.show()
+        sys.exit(app.exec_())
 
 if __name__ == '__main__':
-
     fire.Fire(Weather)

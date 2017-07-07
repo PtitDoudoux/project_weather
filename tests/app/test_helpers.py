@@ -7,7 +7,7 @@
 
 import pytest
 from project_weather.app.exceptions import GeolocationError
-from project_weather.app.helpers import is_empty, get_city, get_postal_code
+from project_weather.app.helpers import empty, get_city, get_postal_code
 
 
 @pytest.fixture
@@ -16,7 +16,7 @@ def test_postal_code_values(tpcv=""):
     return {
         "good_postal_code": "93700",
         "bad_postal_code": "21444477788",
-        "misformed_postal_code": "i wan't you tu bug"
+        "misformed_postal_code": "i wan't you to bug"
     }.get(tpcv, "")
 
 
@@ -31,30 +31,30 @@ def test_city_values(tcv=""):
     }.get(tcv, "")
 
 
-def test_is_empty():
+def test_empty():
     """ Test if the function check well is a structure is empty or not """
 
     empty_str = ""
     empty_list = []
     empty_dict = {}
 
-    assert is_empty(empty_str) is True
-    assert is_empty(empty_list) is True
-    assert is_empty(empty_dict) is True
+    assert empty(empty_str) is True
+    assert empty(empty_list) is True
+    assert empty(empty_dict) is True
 
     not_empty_str = "test"
     not_empty_list = ['t', 'e', 's', 't']
     not_empty_dict = {"foo": "bar"}
 
-    assert is_empty(not_empty_str) is False
-    assert is_empty(not_empty_list) is False
-    assert is_empty(not_empty_dict) is False
+    assert empty(not_empty_str) is False
+    assert empty(not_empty_list) is False
+    assert empty(not_empty_dict) is False
 
 
 def test_get_postal_code():
     """
-    | Test if a city is retrieved from a postal code
-    | and raise an GeolocationError if the postal is misformed
+    Test if a city is retrieved from a postal code
+    and raise an GeolocationError if the postal is misformed
     """
 
     good_city = test_city_values("good_city")
@@ -67,27 +67,27 @@ def test_get_postal_code():
 
     with pytest.raises(GeolocationError):
         bad_city = test_city_values("bad_city")
-        test_postal_code = get_postal_code(bad_city)
+        get_postal_code(bad_city)
 
     with pytest.raises(GeolocationError):
         empty_city = test_city_values()
-        test_postal_code = get_postal_code(empty_city)
+        get_postal_code(empty_city)
 
 
 def test_get_city():
     """
-    | Test if a postal_code is retrieved from a city
-    | and raise an GeolocationError if the postal is misformed
+    Test if a postal_code is retrieved from a city
+    and raise an GeolocationError if the postal is misformed
     """
 
-    good_postal_code = test_city_values("good_postal_code")
+    good_postal_code = test_postal_code_values("good_postal_code")
     test_city = get_city(good_postal_code)
     assert test_city == "Drancy"
 
     with pytest.raises(GeolocationError):
         bad_postal_code = test_postal_code_values("bad_postal_code")
-        test_city = get_city(bad_postal_code)
+        get_city(bad_postal_code)
 
     with pytest.raises(GeolocationError):
         empty_postal_code = test_postal_code_values()
-        test_city = get_city(empty_postal_code)
+        get_city(empty_postal_code)
