@@ -7,9 +7,9 @@
 
 import pytest
 import bs4
-from project_weather.app.webmining import MeteoFrance
-from project_weather.app.exceptions import MeteoFranceError
-from project_weather.app.helpers import empty
+from weather.app.webmining import MeteoFrance
+from weather.app.exceptions import MeteoFranceError
+from weather.app.helpers import empty
 
 
 @pytest.fixture

@@ -6,8 +6,8 @@
 
 
 import pytest
-from project_weather.app.exceptions import GeolocationError
-from project_weather.app.helpers import empty, get_city, get_postal_code
+from weather.app.exceptions import GeolocationError
+from weather.app.helpers import empty, get_city, get_postal_code
 
 
 @pytest.fixture

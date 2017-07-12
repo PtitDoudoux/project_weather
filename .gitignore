@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .cache/
 .idea/
+dist/
+build/
+weather.egg-info/

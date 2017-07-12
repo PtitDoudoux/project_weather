@@ -6,11 +6,7 @@ This is a Python school project, which aim to retrieve weather data by scrapping
 And probably others website if needed.
 
 ## TODO
-- Add Wind directions
-- Retrieve ephemeris datas
 - Retrieve the pollution of a given location for the current day
-- Make a GUI
-- Test everything testable
 
 ## Who are we ?
 
