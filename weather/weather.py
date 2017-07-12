@@ -9,10 +9,10 @@ import sys
 import fire
 from requests.exceptions import RequestException
 from PyQt5.QtWidgets import QApplication
-from app.exceptions import GeolocationError, MeteoFranceError
-from app.webmining import MeteoFrance
-from app.gui import WeatherForm
-from app.helpers import print_presenter, print_terminal_line_char
+from .app.exceptions import GeolocationError, MeteoFranceError
+from .app.webmining import MeteoFrance
+from .app.gui import WeatherForm
+from .app.helpers import print_presenter, print_terminal_line_char
 
 
 class Weather:

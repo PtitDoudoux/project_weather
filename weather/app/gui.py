@@ -10,9 +10,9 @@ from pathlib import Path
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtCore import QUrl
 from PyQt5 import uic
-from app.webmining import MeteoFrance
-from app.exceptions import MeteoFranceError
-from app.helpers import empty
+from weather.app.webmining import MeteoFrance
+from weather.app.exceptions import MeteoFranceError
+from weather.app.helpers import empty
 
 root_dir = str(Path('.').absolute())
 
