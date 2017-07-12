@@ -11,3 +11,5 @@ And probably others website if needed.
 ## Who are we ?
 
 Whe are 3 students of the 3IW1 at ESGI for the year 2016 - 2017
+
+A install script is needed because it's impossible to install PyQt5 through setuptools ...
