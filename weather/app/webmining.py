@@ -47,7 +47,7 @@ class Location(metaclass=ABCMeta):
 class MeteoFrance(Location):
     """ Class for mining some webpage of meteofrance.fr """
 
-    def __init__(self, city, postal_code, html=False):
+    def __init__(self, city, postal_code):
         """
         Initialize a MeteoFrance object with a given city and postal code
         and setup the connection to meteofrance.fr, plus scrap the content
@@ -101,7 +101,6 @@ class MeteoFrance(Location):
         if timestamps == "today":
             weather_datas = [data for data in self.weather[0].stripped_strings]
             time = datetime.datetime.now()
-            # TODO: ephemeris_datas = soup.find("article", {"class": "mod-ephemeride"})
         elif timestamps == "tommorow":
             weather_datas = [data for data in self.weather[1].stripped_strings]
             time = datetime.datetime.now() + datetime.timedelta(days=1)
@@ -145,7 +144,7 @@ class MeteoFrance(Location):
 
             if i < 4:
                 formatted_wd["uv"] = weather_datas[5]
-                formatted_wd["wind"] = ' '.join(weather_datas[6:])  # TODO: Add wind direction
+                formatted_wd["wind"] = ' '.join(weather_datas[6:])
             else:
                 formatted_wd["wind"] = ' '.join(weather_datas[5:-1])  # TODO: Add wind direction
                 formatted_wd["trust"] = weather_datas[-1]
@@ -209,25 +208,3 @@ class MeteoFrance(Location):
             raise MeteoFranceError("The weather couldn't be retrieved from your city / postal code")
 
         return weather
-
-
-class BreezoMeter(Location):
-    """ Class for mining the air quality on breezometer.com """
-
-    def __init__(self, city, postal_code):
-        """
-        Initialize a BreezoMeter object with a given city and postal code
-        and setup the connection to breezometer.com, plus scrap the content
-        of the city / postal code webpage
-
-        :param city: The city to retrieve the weather
-        :param postal_code: The postal code to retrieve the air quality
-        """
-
-        super(BreezoMeter, self).__init__(city, postal_code)
-        self.session = requests.Session()
-
-    def retrieve_air_quality(self):
-        """ Retrieve the air quality of the city / postal code """
-
-        pass

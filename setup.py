@@ -40,7 +40,7 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'weather = weather:main',
+            'weather = weather.weather:main',
         ],
     },
 

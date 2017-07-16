@@ -6,7 +6,7 @@
 
 
 from OpenGL import GL  # Needed monkey patch because of bugs on some device with OpenGL and PyQt5
-from pathlib import Path
+import pkg_resources
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtCore import QUrl
 from PyQt5 import uic
@@ -14,13 +14,11 @@ from weather.app.webmining import MeteoFrance
 from weather.app.exceptions import MeteoFranceError
 from weather.app.helpers import empty
 
-root_dir = str(Path('.').absolute())
-
 # Load needed uis files
-uifile_1 = root_dir + "/ressources/qt_ui/weather_form.ui"
+uifile_1 = pkg_resources.resource_filename('weather', 'ressources/qt_ui/weather_form.ui')
 form_1, base_1 = uic.loadUiType(uifile_1)
 
-uifile_2 = root_dir + "/ressources/qt_ui/main_weather.ui"
+uifile_2 = pkg_resources.resource_filename('weather', 'ressources/qt_ui/main_weather.ui')
 form_2, base_2 = uic.loadUiType(uifile_2)
 
 
@@ -37,7 +35,6 @@ class WeatherForm(form_1, base_1):
         self.buttonBox.accepted.connect(self.print_weather)
         self.setWindowTitle("Weather APP")
 
-
     def print_weather(self):
         """
         Method for switching to the Main
@@ -46,8 +43,7 @@ class WeatherForm(form_1, base_1):
         if not empty(self.city_edit.text()) or not empty(self.postalcode_edit.text()):
             try:
                 meteofrance = MeteoFrance(city=self.city_edit.text(),
-                                               postal_code=self.postalcode_edit.text(),
-                                               html=True)
+                                          postal_code=self.postalcode_edit.text())
                 self.main = MainWeatherWindow(url=meteofrance.url)
                 self.main.show()
                 self.close()

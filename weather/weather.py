@@ -132,5 +132,10 @@ class Weather:
         weather_gui.show()
         sys.exit(app.exec_())
 
-if __name__ == '__main__':
+
+def main():
+    """ Entry point for the setup.py """
     fire.Fire(Weather)
+
+if __name__ == '__main__':
+    main()

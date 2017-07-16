@@ -88,20 +88,6 @@ def get_city(postal_code):
     return data[0]["nom"]
 
 
-def get_arrow_icon(text):
-    """
-    Return the unicode icon depending on text crawled
-    on meteofrance.fr about the direction of the wind
-
-    :param text: The text of the unicode associated
-    :type text: string
-    :return: The icon unicode of the text
-    :rtype: string
-    """
-    # TODO: Code this function
-    pass
-
-
 def get_weather_icon(text):
     """
     Return the unicode icon depending on text crawled

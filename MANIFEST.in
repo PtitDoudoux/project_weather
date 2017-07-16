@@ -1,2 +1,2 @@
 include *.md
-recursive-include weather/ressoures/qt_ui *.ui
+recursive-include weather/ressources/qt_ui *.ui
