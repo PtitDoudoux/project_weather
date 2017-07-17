@@ -40,7 +40,7 @@ class WeatherForm(form_1, base_1):
         Method for switching to the Main
         windows when form is sent
         """
-        if not empty(self.city_edit.text()) or not empty(self.postalcode_edit.text()):
+        if not empty(self.city_edit.text()) and not empty(self.postalcode_edit.text()):
             try:
                 meteofrance = MeteoFrance(city=self.city_edit.text(),
                                           postal_code=self.postalcode_edit.text())
@@ -52,7 +52,7 @@ class WeatherForm(form_1, base_1):
                 self.alert.show()
                 self.show()
         else:
-            self.alert = AlertWindow(msg="At least one of two form should be filled")
+            self.alert = AlertWindow(msg="You have to inquire both of the args")
             self.alert.show()
             self.show()
 
