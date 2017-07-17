@@ -24,6 +24,7 @@ Those are mandatory because sometimes setuptools can't find them by itself.
 ```bash
 pip3 install PyQt5 && pip3 install PyOpenGL
 python3 setup.py install
+python3 setup.py test
 ```
 
 # How to use it ?

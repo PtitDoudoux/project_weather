@@ -21,6 +21,10 @@ setup(
 
     long_description=open('README.md').read(),
 
+    setup_requires=['pytest-runner'],
+
+    tests_require=['pytest'],
+
     install_requires= ["fire", "requests", "beautifulsoup4", "pytest",
                        "PyOpenGL", "PyOpenGL_accelerate", "PyQt5"],
 
